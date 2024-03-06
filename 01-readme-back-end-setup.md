@@ -20,7 +20,7 @@ npm i -g yarn
 
 Create empty project directory inside your machine
 
-## Back-End Installation For Back-End (Express)
+## Back-End Installation (Express)
 
 Go to empty directory
 

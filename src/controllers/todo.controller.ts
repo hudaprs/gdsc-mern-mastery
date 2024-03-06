@@ -1,8 +1,8 @@
 // Express
-import type { Request, Response } from "express";
+import type { Request, Response } from 'express'
 
 // Models
-import { Todo } from "../models/todo.model";
+import { Todo } from '../models/todo.model'
 
 class TodoController {
   /**
@@ -15,19 +15,19 @@ class TodoController {
    */
   index = async (req: Request, res: Response) => {
     try {
-      const todoList = await Todo.find();
+      const todoList = await Todo.find()
 
-      return res.status(200).json(todoList);
+      return res.status(200).json(todoList)
     } catch (err) {
       if (err instanceof Error) {
-        return res.status(500).json({ message: err.message });
+        return res.status(500).json({ message: err.message })
       }
 
       return res
         .status(500)
-        .json({ message: "Something went wrong form server" });
+        .json({ message: 'Something went wrong form server' })
     }
-  };
+  }
 
   /**
    * @description Create new todo
@@ -39,30 +39,30 @@ class TodoController {
    */
   store = async (req: Request, res: Response) => {
     try {
-      const { title, completed } = req.body;
+      const { title, completed } = req.body
 
       // Simple validation
-      if ([undefined, "", null].includes(title)) {
-        return res.status(422).json({ message: "Title is required" });
+      if ([undefined, '', null].includes(title)) {
+        return res.status(422).json({ message: 'Title is required' })
       }
 
       const todo = new Todo({
         title,
-        completed,
-      });
-      const newTodo = await todo.save();
+        completed
+      })
+      const newTodo = await todo.save()
 
-      return res.status(201).json(newTodo);
+      return res.status(201).json(newTodo)
     } catch (err) {
       if (err instanceof Error) {
-        return res.status(500).json({ message: err.message });
+        return res.status(500).json({ message: err.message })
       }
 
       return res
         .status(500)
-        .json({ message: "Something went wrong form server" });
+        .json({ message: 'Something went wrong form server' })
     }
-  };
+  }
 
   /**
    * @description Update existing todo
@@ -74,38 +74,61 @@ class TodoController {
    */
   update = async (req: Request, res: Response) => {
     try {
-      const { id } = req.params;
-      const { title, completed } = req.body;
+      const { id } = req.params
+      const { completed } = req.body
 
-      // Simple validation
-      if ([undefined, "", null].includes(title)) {
-        return res.status(422).json({ message: "Title is required" });
-      }
-
-      const todoDetail = await Todo.findById(id);
+      const todoDetail = await Todo.findById(id)
       if (!todoDetail)
-        return res.status(404).json({ message: "Todo not found" });
+        return res.status(404).json({ message: 'Todo not found' })
 
       todoDetail.set({
-        title,
-        completed,
-      });
+        completed
+      })
 
-      const updatedTodo = await todoDetail.save();
+      const updatedTodo = await todoDetail.save()
 
-      return res.status(200).json(updatedTodo);
+      return res.status(200).json(updatedTodo)
     } catch (err) {
       if (err instanceof Error) {
-        return res.status(500).json({ message: err.message });
+        return res.status(500).json({ message: err.message })
       }
 
       return res
         .status(500)
-        .json({ message: "Something went wrong form server" });
+        .json({ message: 'Something went wrong form server' })
     }
-  };
+  }
+
+  /**
+   * @description Delete todo
+   *
+   * @param {Request} req
+   * @param {Response} res
+   *
+   * @return {Promise<any>} Promise<any>
+   */
+  delete = async (req: Request, res: Response) => {
+    try {
+      const { id } = req.params
+
+      const todoDetail = await Todo.findByIdAndDelete(id)
+      if (!todoDetail) {
+        return res.status(404).json({ message: 'Todo not found' })
+      }
+
+      return res.status(200).json(todoDetail)
+    } catch (err) {
+      if (err instanceof Error) {
+        return res.status(500).json({ message: err.message })
+      }
+
+      return res
+        .status(500)
+        .json({ message: 'Something went wrong form server' })
+    }
+  }
 }
 
-const todoController = new TodoController();
+const todoController = new TodoController()
 
-export { todoController };
+export { todoController }

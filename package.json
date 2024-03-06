@@ -15,6 +15,7 @@
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
     "@types/node": "^20.11.24",
+    "concurrently": "^8.2.2",
     "husky": "^8.0.0",
     "lint-staged": "^15.2.2",
     "prettier": "^3.2.5",
@@ -23,11 +24,13 @@
   },
   "scripts": {
     "dev": "ts-node-dev ./src/server.ts",
-    "prepare": "husky install"
+    "dev:frontend": "cd ./client && yarn dev",
+    "prepare": "husky install",
+    "dev:all": "concurrently \"yarn dev\" \"yarn dev:frontend\""
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx,html,css,json}": [
-      "yarn prettier --write"
+      "yarn prettier --write \"src/**/*.{js,jsx,ts,tsx,css,md,json}\" --config ./.prettierrc"
     ]
   }
 }
