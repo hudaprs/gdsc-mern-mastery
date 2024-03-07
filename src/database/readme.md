@@ -1,6 +1,10 @@
-// Mongoose
-import mongoose from 'mongoose'
+# Database
 
+What you need to do here? Here's simple an example of Database (with Mongo)
+
+URL Example: `mongodb://{host}:{port|27017}/{database-name}`
+
+```typescript
 const startDatabase = async () => {
   try {
     await mongoose.connect('mongodb://localhost:27017/gdsc-mern-mastery')
@@ -13,3 +17,4 @@ const startDatabase = async () => {
 }
 
 export { startDatabase }
+```

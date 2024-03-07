@@ -65,3 +65,16 @@ yarn add express cors mongoose
 ```shell
 yarn add -D ts-node-dev @types/node @types/express @types/cors
 ```
+
+6. Update `package.json`
+
+```json
+{
+  "main": "index.ts",
+  "scripts": {
+    "dev": "ts-node-dev ./src/server.ts"
+  }
+}
+```
+
+7. Create Empty `server.ts` file inside `src` folder

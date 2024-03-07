@@ -1,12 +1,11 @@
 {
   "name": "mern-mastery",
   "version": "1.0.0",
-  "main": "index.ts",
+  "main": "index.js",
   "license": "MIT",
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.18.3",
-    "global": "^4.4.0",
     "mongoose": "^8.2.0"
   },
   "devDependencies": {
@@ -23,15 +22,13 @@
     "typescript": "^5.3.3"
   },
   "scripts": {
-    "dev:install": "yarn && cd ./client && yarn",
-    "dev": "ts-node-dev ./src/server.ts",
-    "dev:frontend": "cd ./client && yarn dev",
-    "dev:all": "concurrently \"yarn dev\" \"yarn dev:frontend\"",
     "prepare": "husky install"
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx,html,css,json}": [
       "yarn prettier --write \"src/**/*.{js,jsx,ts,tsx,css,md,json}\" --config ./.prettierrc"
     ]
-  }
+  },
+  "repository": "https://hudaprs@github.com/hudaprs/gdsc-mern-mastery.git",
+  "author": "Huda Prasetyo <real.hudaprasetyo@gmail.com>"
 }

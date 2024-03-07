@@ -1,34 +1,19 @@
-// React
-import { useCallback, useState, useEffect } from 'react'
+// TODO: Do general react & optimization?
 
-// Types
-import { Todo } from './types/todo.type'
+// TODO: Add type definition
 
-// API
-import * as todoApi from './api/todo.api'
+// TODO: Do API Integration
 
-// Components
-import TodoItem from './components/TodoItem'
+// TODO: Call child component
 
 const App = () => {
-  // Common State
-  const [title, setTitle] = useState<string>('')
-  const [todoList, setTodoList] = useState<Todo[]>([])
+  // TODO: Make common state
 
   /**
    * @description Fetch todo list
    *
    * @return {Promise<void>} Promise<void>
    */
-  const fetchTodoList = useCallback(async (): Promise<void> => {
-    try {
-      const response = await todoApi.getList()
-
-      setTodoList(response.data)
-    } catch (_) {
-      //
-    }
-  }, [])
 
   /**
    * @description Create todo
@@ -37,20 +22,6 @@ const App = () => {
    *
    * @return {Promise<void>} Promise<void>
    */
-  const createTodo = useCallback(
-    async (form: { title: string }): Promise<void> => {
-      try {
-        const response = await todoApi.store({
-          body: { title: form.title, completed: false }
-        })
-
-        setTodoList(prev => [response.data, ...prev])
-      } catch (_) {
-        //
-      }
-    },
-    []
-  )
 
   /**
    * @description Update todo
@@ -60,27 +31,6 @@ const App = () => {
    *
    * @return {Promise<void>} Promise<void>
    */
-  const updateTodo = useCallback(
-    async (form: { completed: boolean; id: string }): Promise<void> => {
-      try {
-        await todoApi.update({
-          params: { id: form.id },
-          body: { completed: form.completed }
-        })
-
-        setTodoList(prev =>
-          prev.map(todo =>
-            todo._id === form.id
-              ? { ...todo, completed: !todo.completed }
-              : todo
-          )
-        )
-      } catch (_) {
-        //
-      }
-    },
-    []
-  )
 
   /**
    * @description Update todo
@@ -89,29 +39,12 @@ const App = () => {
    *
    * @return {Promise<void>} Promise<void>
    */
-  const deleteTodo = useCallback(
-    async (form: { id: string }): Promise<void> => {
-      try {
-        await todoApi.destroy({
-          params: { id: form.id }
-        })
-
-        setTodoList(prev => prev.filter(todo => todo._id !== form.id))
-      } catch (_) {
-        //
-      }
-    },
-    []
-  )
 
   /**
    * @description Load data when came first to this component
    *
    * @return {void} void
    */
-  useEffect(() => {
-    fetchTodoList()
-  }, [fetchTodoList])
 
   return (
     <div id='app'>
@@ -120,38 +53,20 @@ const App = () => {
       {/* End Title */}
 
       {/* Form */}
+      {/* TODO: Do some controlled data inside this component */}
       <input
         type='text'
         placeholder='✎ What needs to be done'
-        value={title}
-        onChange={e => setTitle(e.target.value)}
         onKeyDown={async event => {
           if (event.code === 'Enter') {
-            await createTodo({ title })
-            setTitle('')
+            // TODO: Do some submission here
           }
         }}
       />
       {/* End Form */}
 
       {/* Todo List */}
-      <ul>
-        {todoList.map(todo => (
-          <TodoItem
-            key={todo._id}
-            title={todo.title}
-            completed={todo.completed}
-            onCheck={() => {
-              updateTodo({ completed: !todo.completed, id: todo._id })
-            }}
-            onDelete={async () => {
-              await deleteTodo({ id: todo._id })
-
-              fetchTodoList()
-            }}
-          />
-        ))}
-      </ul>
+      <ul>{/* TODO: Render todo list here */}</ul>
 
       {/* End Todo List */}
     </div>

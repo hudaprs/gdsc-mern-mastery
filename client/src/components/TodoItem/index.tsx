@@ -1,34 +1,24 @@
-// React
-import { memo } from 'react'
+// TODO: Do some memoize in this component
 
-// Types
-import { TodoItemProps } from './types'
+// TODO: Add type definition for this component
 
-const TodoItem = memo(
-  ({ title, completed, onCheck, onDelete }: TodoItemProps) => {
-    return (
-      <li>
-        <div className='title-wrapper'>
-          <input
-            type='checkbox'
-            checked={completed}
-            onChange={onCheck}
-            style={{ cursor: 'pointer' }}
-          />
+const TodoItem = () => {
+  return (
+    <li>
+      <div className='title-wrapper'>
+        {/* TODO: Add event handler, and controlled value  */}
+        <input type='checkbox' style={{ cursor: 'pointer' }} />
 
-          <p className={completed ? 'done' : undefined}>{title}</p>
-        </div>
+        {/* TODO: Add some dynamic class here */}
+        <p>{/* TODO: Title Here */}</p>
+      </div>
 
-        <div className='actions-wrapper'>
-          <button className='delete' onClick={onDelete}>
-            ❌
-          </button>
-        </div>
-      </li>
-    )
-  }
-)
-
-TodoItem.displayName = 'TodoItem'
+      <div className='actions-wrapper'>
+        {/* TODO: Add event handler  */}
+        <button className='delete'>❌</button>
+      </div>
+    </li>
+  )
+}
 
 export default TodoItem
