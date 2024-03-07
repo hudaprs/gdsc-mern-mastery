@@ -23,10 +23,11 @@
     "typescript": "^5.3.3"
   },
   "scripts": {
+    "dev:install": "yarn && cd ./client && yarn",
     "dev": "ts-node-dev ./src/server.ts",
     "dev:frontend": "cd ./client && yarn dev",
-    "prepare": "husky install",
-    "dev:all": "concurrently \"yarn dev\" \"yarn dev:frontend\""
+    "dev:all": "concurrently \"yarn dev\" \"yarn dev:frontend\"",
+    "prepare": "husky install"
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx,html,css,json}": [
